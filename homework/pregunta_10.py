@@ -20,3 +20,9 @@ def pregunta_10():
 
 
     """
+    def parse_row(row):
+        return (row[0], len(row[3].split(',')), len(row[4].split(',')))
+    with open('files/input/data.csv', 'r') as f:
+        lines = f.readlines()
+        rows = tuple(map(lambda x: x.split('\t'), lines))
+        return list(map(parse_row, rows))

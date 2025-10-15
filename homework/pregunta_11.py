@@ -16,3 +16,14 @@ def pregunta_11():
 
 
     """
+    with open('files/input/data.csv', 'r') as f:
+        lines = f.readlines()
+        rows = tuple(map(lambda x: x.split('\t'), lines))
+        occurrencies = dict()
+        for row in rows:
+            for key in row[3].split(','):
+                if key[0] in occurrencies:
+                    occurrencies[key[0]] += int(row[1])
+                else:
+                    occurrencies[key[0]] = int(row[1])
+        return occurrencies

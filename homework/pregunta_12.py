@@ -15,3 +15,15 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+    def parse_col_4(col):
+        return sum(map(lambda x: int(x.split(':')[1]), col.split(',')))
+    with open('files/input/data.csv', 'r') as f:
+        lines = f.readlines()
+        rows = tuple(map(lambda x: x.split('\t'), lines))
+        occurrencies = dict()
+        for row in rows:
+            if row[0] in occurrencies:
+                occurrencies[row[0]] += parse_col_4(row[4])
+            else:
+                occurrencies[row[0]] = parse_col_4(row[4])
+        return occurrencies

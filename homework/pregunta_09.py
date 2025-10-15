@@ -24,3 +24,15 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    with open('files/input/data.csv', 'r') as f:
+        lines = f.readlines()
+        rows = tuple(map(lambda x: x.split('\t'), lines))
+        occurrencies = dict()
+        for row in rows:
+            for item in row[4].split(','):
+                key, _ = item.split(':')
+                if key in occurrencies:
+                    occurrencies[key] += 1
+                else:
+                    occurrencies[key] = 1
+        return occurrencies

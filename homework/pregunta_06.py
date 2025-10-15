@@ -26,3 +26,18 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    with open('files/input/data.csv', 'r') as f:
+        lines = f.readlines()
+        rows = tuple(map(lambda x: x.split('\t'), lines))
+        occurrencies = dict()
+        for row in rows:
+            for item in row[4].split(','):
+                key, value = item.split(':')
+                if key in occurrencies:
+                    current_min, current_max = occurrencies[key]
+                    occurrencies[key] = min(current_min, int(value)), max(current_max, int(value))
+                else:
+                    occurrencies[key] = int(value), int(value)
+        items = list(map(lambda x: (x[0], *x[1]), occurrencies.items()))
+        result = sorted(items, key=lambda x: x[0])
+        return result

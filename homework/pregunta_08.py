@@ -27,3 +27,15 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    with open('files/input/data.csv', 'r') as f:
+        lines = f.readlines()
+        rows = tuple(map(lambda x: x.split('\t'), lines))
+        occurrencies = dict()
+        for row in rows:
+            if int(row[1]) in occurrencies:
+                occurrencies[int(row[1])].add(row[0])
+            else:
+                occurrencies[int(row[1])] = set([row[0]])
+        items = [ (key, sorted(list(value))) for key, value in occurrencies.items()]
+        result = sorted(items, key=lambda x: x[0])
+        return result

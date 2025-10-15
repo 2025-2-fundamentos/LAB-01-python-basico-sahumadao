@@ -14,3 +14,7 @@ def pregunta_01():
     214
 
     """
+    with open('files/input/data.csv', 'r') as f:
+        lines = f.readlines()
+        result = sum(map(lambda x: int(x.split('\t')[1]), lines))
+        return result

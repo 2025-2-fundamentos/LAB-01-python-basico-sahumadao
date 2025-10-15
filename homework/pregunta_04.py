@@ -26,3 +26,14 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    with open('files/input/data.csv', 'r') as f:
+        lines = f.readlines()
+        months = tuple(map(lambda x: x.split('\t')[2].split('-')[1], lines))
+        occurrencies = dict()
+        for month in months:
+            if month in occurrencies:
+                occurrencies[month] += 1
+            else:
+                occurrencies[month] = 1
+        result = sorted(occurrencies.items(), key=lambda x: x)
+        return result
